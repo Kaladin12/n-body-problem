@@ -24,7 +24,7 @@ void parallel() {
 }
 
 int main() {
-	seq();
+	//seq();
 	parallel();
 	return 0;
 }

@@ -9,20 +9,27 @@
 
 
 void parallel_do_positions() {
-	int i;
+	int i, axis;
 #pragma omp parallel for schedule(dynamic, 50) num_threads(8)
 	for (i = 0; i < BODY_NUM; i++)
 	{
-		sequential_update_position();
+		for (axis = 0; axis < 3; axis++)
+		{
+			positions[i][axis] = velocities[i][axis] * dt;
+		}
 	}
 }
 
 void parallel_do_velocities() {
-	int i;
+	int i, axis;
 #pragma omp parallel for schedule(dynamic, 50) num_threads(8)
 	for (i = 0; i < BODY_NUM; i++)
 	{
-		sequential_update_velocity();
+		for (axis = 0; axis < 3; axis++)
+		{
+			velocities[i][axis] = velocities[i][axis] + (((forces[i][axis] + forces_old[i][axis]) * dt) / masses[i]);
+			forces_old[i][axis] = forces[i][axis];
+		}
 	}
 }
 
@@ -53,7 +60,7 @@ void n_body_parallel() {
 			for (j = 0; j < BODY_NUM; j++)
 			{
 				if (i != j) {
-					 res = sequential_gravitational_force(&bodies[i], &bodies[j], masses[i]);
+					 res = sequential_gravitational_force(&bodies[i], &bodies[j], masses[i], masses[j]);
 					//printf("vals %.17g, %.17g, %.17g\n", res[0], res[1], res[2]);
 					forces[i][0] += res[0];
 					forces[i][1] += res[1];
@@ -63,9 +70,10 @@ void n_body_parallel() {
 			}
 		}
 		parallel_do_velocities();
+		
 		//printf("%lf", t);
 	}
-	printf("vals %.17g, %.17g, %.17g\n", forces[0][0], forces[0][1], forces[0][2]);
+	printf("vals %.17g, %.17g, %.17g\n", forces[1][0], forces[1][1], forces[1][2]);
 
 }
 
@@ -78,12 +86,12 @@ void init_all_parallel() {
 		{
 			for (j = 0; j < 3; j++)
 			{
-				bodies[i][j] = RandomReal(0, 100000);
-				positions[i][j] = RandomReal(0, 1000);
-				velocities[i][i] = RandomReal(0, 1000);
-				forces_old[i][j] = 0;
+				bodies[i][j] = RandomReal(1, 100000);
+				positions[i][j] = RandomReal(1, 1000);
+				velocities[i][i] = RandomReal(1, 1000);
+				forces_old[i][j] = 1;
 			}
-			masses[i] = RandomReal(0, 100000);
+			masses[i] = RandomReal(1, 100000);
 		}
 	}
 	printf("\nPOSITIONS %.17g, %.17g, %.17g\n", positions[0][0], positions[0][1], positions[0][2]);

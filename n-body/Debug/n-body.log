@@ -1,7 +1,7 @@
 ﻿  parallel.c
-D:\CETYS\7\paralelo\proyecto\n-body\parallel.c(56,54): warning C4047: 'function': 'double *' differs in levels of indirection from 'double (*)[3]'
-D:\CETYS\7\paralelo\proyecto\n-body\parallel.c(56,44): warning C4024: 'sequential_gravitational_force': different types for formal and actual parameter 1
-D:\CETYS\7\paralelo\proyecto\n-body\parallel.c(56,66): warning C4047: 'function': 'double *' differs in levels of indirection from 'double (*)[3]'
-D:\CETYS\7\paralelo\proyecto\n-body\parallel.c(56,56): warning C4024: 'sequential_gravitational_force': different types for formal and actual parameter 2
-D:\CETYS\7\paralelo\proyecto\n-body\parallel.c(49,11): warning C4101: 'res': unreferenced local variable
+D:\CETYS\7\paralelo\proyecto\n-body\parallel.c(63,54): warning C4047: 'function': 'double *' differs in levels of indirection from 'double (*)[3]'
+D:\CETYS\7\paralelo\proyecto\n-body\parallel.c(63,44): warning C4024: 'sequential_gravitational_force': different types for formal and actual parameter 1
+D:\CETYS\7\paralelo\proyecto\n-body\parallel.c(63,66): warning C4047: 'function': 'double *' differs in levels of indirection from 'double (*)[3]'
+D:\CETYS\7\paralelo\proyecto\n-body\parallel.c(63,56): warning C4024: 'sequential_gravitational_force': different types for formal and actual parameter 2
+D:\CETYS\7\paralelo\proyecto\n-body\parallel.c(56,11): warning C4101: 'res': unreferenced local variable
   n-body.vcxproj -> D:\CETYS\7\paralelo\proyecto\n-body\Debug\n-body.exe
